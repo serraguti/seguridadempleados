@@ -1,4 +1,5 @@
 ﻿using SeguridadEmpleados.Data;
+using SeguridadEmpleados.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,13 @@ namespace SeguridadEmpleados.Repositories
         public RepositoryEmpleados(EmpleadosContext context)
         {
             this.context = context;
+        }
+
+        public Empleado ExisteEmpleado(String apellido, int idempleado)
+        {
+            return this.context.Empleados
+                .SingleOrDefault(x => x.Apellido == apellido
+                && x.IdEmpleado == idempleado);
         }
     }
 }
