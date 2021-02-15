@@ -28,12 +28,17 @@
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" 
+                    <a class="nav-link"
+                       asp-action="EmpleadosSubordinados"
+                       asp-controller="Empleados">Subordinados</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"
                        asp-action="Perfil"
                        asp-controller="Empleados">Perfil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
+                    <partial name="_PartialMenuEmpleado" />
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ejemplos</a>

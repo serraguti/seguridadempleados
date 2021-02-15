@@ -56,8 +56,16 @@ namespace SeguridadEmpleados.Controllers
                         IsPersistent = true,
                          ExpiresUtc = DateTime.Now.AddMinutes(15)
                     });
-                return RedirectToAction("Perfil", "Empleados");
+                String action = TempData["action"].ToString();
+                String controller = TempData["controller"].ToString();
+                return RedirectToAction(action, controller);
             }
+        }
+
+        public async Task<IActionResult> LogOut() {
+            await HttpContext.SignOutAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult AccesoDenegado()

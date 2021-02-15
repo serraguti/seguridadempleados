@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,8 +40,12 @@ namespace MvcCore
             services.AddTransient<RepositoryEmpleados>();
             services.AddDbContext<EmpleadosContext>(
                 options => options.UseSqlServer(this.Configuration.GetConnectionString("cadenahospital")));
+            services.AddSingleton<ITempDataProvider
+                , CookieTempDataProvider>();
+            services.AddSession();
             services.AddControllersWithViews
-                (option => option.EnableEndpointRouting = false);
+                (option => option.EnableEndpointRouting = false)
+                .AddSessionStateTempDataProvider();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +60,7 @@ namespace MvcCore
 
             app.UseStaticFiles();
             app.UseAuthentication();
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(name: "default"

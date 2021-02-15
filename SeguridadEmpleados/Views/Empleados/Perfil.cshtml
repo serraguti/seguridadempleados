@@ -1,0 +1,15 @@
+﻿<h1>Perfil del empleado</h1>
+
+@*SI DESEAMOS RECUPERAR CARACTERISTICAS ALMACENADAS EN CLAIM*@
+
+<h2>
+    @User.FindFirst(ClaimTypes.Name).Value
+</h2>
+<h2>
+    Oficio:
+    @User.FindFirst(ClaimTypes.Role).Value
+</h2>
+<h2>
+    Id empleado 
+    @User.FindFirst(ClaimTypes.NameIdentifier).Value
+</h2>
